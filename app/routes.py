@@ -18,5 +18,18 @@ def planning():
     elif request.method == 'GET':
         return render_template('planning.html')
 
+@app.route('/prod_budget', methods=['GET', 'POST'])
+def prod_budget():
+    if request.method == 'POST':
+        result = request.form 
+        print(result) 
+        return render_template('prod_budget.html')
+    elif request.method == 'GET':
+        return render_template('prod_budget.html')
+
+@app.route('/prod_reports')
+def prod_report():
+    return render_template('prod_reports.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

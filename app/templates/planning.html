@@ -70,22 +70,19 @@
     </head>
     <div class="navbar">
             <a href="/index">Home</a>
-            <a href="#news">Field Plan</a>
             <div class="dropdown">
               <button class="dropbtn">Configuration 
                 <i class="fa fa-caret-down"></i>
               </button>
               <div class="dropdown-content">
-                <a href="#">Field Budget Plan</a>
-                <a href="#">Field Plan</a>
-                <a href="#">Reports</a>
+                <a href="/prod_reports">Production Reports</a>
               </div>
             </div> 
           </div>
           
 
 <div class='container'>
-    <center><h2>Field Acreage Plan</h2></center>
+    <center><h2>Production Field Acreage Plan</h2></center>
     <center><h4> Enter information for each hybrid then click next</h4></center>
     <form id="planningForm" method="post" action="/planning">
     <center><div class='form'>
@@ -102,7 +99,7 @@
       <input type="text" id="hybrid_code" name="hybrid_code" placeholder="Hybrid Code"/><br>  
       <input type="text" id="material_group" name="material_group" placeholder="Material Group"/><br>  
 
-      <input type='submit' onclick="alertSaved()" value='Submit' />
+      <input type='submit' onclick="alertSaved()" value='Next Hybrid' />
 </div></center>
 
 <script>

@@ -3,8 +3,9 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title><h1>Home</h1></title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <title><h1>Field Areage Planning</h1></title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+
         <style>
 .navbar {
     overflow: hidden;
@@ -67,36 +68,50 @@
     display: block;
 }
 
-.button {
-    background-color: rgb(190, 190, 199);
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
 </style>
     </head>
     <div class="navbar">
-            <a href="/index">Logout</a>
+            <a href="/index">Home</a>
+            <div class="dropdown">
+              <button class="dropbtn">Configuration 
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content">
+                <a href="/planning">Field Plan</a>
+                <a href="/prod_reports">Production Reports</a>
+              </div>
+            </div> 
           </div>
-          <h1></h1>
-          <h1></h1>
-          <h1></h1>
-          <h1></h1>
-          <center><h2>Field Planning Tool</h2></center>
-          <div class="centered">
-              <center><a href="#" class="button">Parent Planning</a>
-                <a href="/prod_budget" class="button">Production Planning</a></center>
+          
 
-</div>
+<div class='container'>
+    <center><h2>Production Budget Acreage Plan</h2></center>
+    <form id="planningForm" method="post">
+<center>
+    <h5>Select Record Year</h5>
+<div class="yearselect">
+    <select name="record_year">
+  <option value="2018">2018</option>
+  <option value="2019">2019</option>
+</select></div></center>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<center>
+<h3>Upload Acreage Budget Plan</h3>
+<h5>Budget Plan must be in CSV format with required headers</h5>
+<input type="file" name="filename" id="filename">
+</center>
+<h1></h1>
+<center>
+<form method='post' action="/prod_budget">
+    <button type="Upload"> Upload</button>
+
+</form>
+	
+</center>
+      
 
 
-
-
-</body>
+    
 </html>
