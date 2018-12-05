@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head></head>
+   <body>
+      
+      <h3>
+         <a href = "{{ url_for('plan') }}">Comments - Flask 
+            SQLAlchemy example</a>
+      </h3>
+      
+      <hr/>
+      {%- for message in get_flashed_messages() %}
+         {{ message }}
+      {%- endfor %}
+		
+      <h3>Field (<a href = "{{ url_for('new') }}">Add Field
+         </a>)</h3>
+      
+      <table>
+         <thead>
+            <tr>
+               <th>Hybrid</th>
+               <th>Grower</th>
+               <th>Field Name</th>
+               <th>Certification</th>
+               <th>Certification</th>
+               <th>Field Number</th>
+               <th>Area</th>
+               <th>Cont Gross Acres</th>
+               <th>Percent of Target</th>
+               <th>Female Population</th>
+               <th>Hybrid Code</th>
+               <th>Material Group</th>
+            </tr>
+         </thead>
+         
+         <tbody>
+            {% for row in rows %}
+               <tr>
+                  <td>{{ row.hybrid }}</td>
+                  <td>{{ row.grower }}</td>
+                  <td>{{ row.field_name }}</td>
+                  <td>{{ row.certified }}</td>
+                  <td>{{ row.field_number }}</td>
+                  <td>{{ row.area }}</td>
+                  <td>{{ row.cont_gross_acres }}</td>
+                  <td>{{ row.percent_target }}</td>
+                  <td>{{ row.female_plant_population }}</td>
+                  <td>{{ row.hybrid_code }}</td>
+                  <td>{{ row.material_group }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      
+   </body>
+</html>
