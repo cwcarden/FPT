@@ -66,6 +66,23 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+table {
+    font-family: arial, sans-serif;
+    font-size:12pt;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid hsl(204, 7%, 56%);
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
 </style>
     </head>
     <div class="navbar">
@@ -82,7 +99,7 @@
           
 
 <div class='container'>
-    <center><h2>Production Field Acreage Plan</h2></center>
+    <center><h2>Production Field Acreage Plannning</h2></center>
     <center><h4> Enter information for each hybrid then click next</h4></center>
     <form id="planningForm" method="post" action="/post_data">
     <center><div class='form'>
@@ -105,9 +122,24 @@
 <h1></h1>
 
 <center>
-    {% for data in dataPlan %}
-    <ol> {{ data.id }}. {{ data.hybrid }}---{{ data.grower }}---{{ data.field_name }}---{{ data.certified }}---{{ data.field_number }}---{{ data.area }}---{{ data.cont_gross_acres }}---{{ data.percent_target }}---{{ data.female_plant_population }}---{{ data.hybrid_code }}---{{ data.material_group }}</ol>
-   {% endfor %} 
+
+        <h2>Current Data in Database</h2>
+
+          <table>
+         <tbody>
+         {% for data in dataPlan%}
+         
+             <tr><td>{{ data.field_id }} {{ data.grower }} {{ data.field_name }}</td></tr>
+         {% endfor %}
+         </tbody>
+     </table>
+          
+
+       
+
+
+
+
 
 </center>
 

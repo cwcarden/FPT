@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)   
 
@@ -8,7 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhos
 db = SQLAlchemy(app)
 
 class Fields(db.Model):
-    id = db.Column(db.Integer, primary_key=True, default=lambda: uuid.uuid4().hex)
+    field_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     hybrid = db.Column(db.String(80), primary_key=True)
     grower = db.Column(db.String(80), primary_key=True)
     field_name = db.Column(db.String(80), unique=True)
@@ -59,7 +59,7 @@ def prod_budget():
     if request.method == 'POST':
         result = request.form 
         print(result) 
-        return render_template('prod_budget.html')
+        return redirect(url_for('field_plan'))
     elif request.method == 'GET':
         return render_template('prod_budget.html')
 
