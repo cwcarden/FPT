@@ -67,22 +67,11 @@
     display: block;
 }
 
-table {
-    font-family: arial, sans-serif;
-    font-size:12pt;
-    border-collapse: collapse;
-    width: 100%;
+table, th, td {
+    border: 1px solid black;
+
 }
 
-td, th {
-    border: 1px solid hsl(204, 7%, 56%);
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
 </style>
     </head>
     <div class="navbar">
@@ -120,28 +109,44 @@ tr:nth-child(even) {
 </div></center>
 <h1></h1>
 <h1></h1>
-
 <center>
+    <h2>Current Data in Database</h2>
+    <table style="margin-left: 12px;">
+        <th>
+            <tr style="color: #1b3a09; ">
+            <td align="center">ID</td>
+            <td align="center">Hybrid</td>
+            <td align="center">Grower</td>
+            <td align="center">Field Name</td>
+            <td align="center">Certified</td>
+            <td align="center">Field Number</td>
+            <td align="center">Growing Area</td>
+            <td align="center">Cont Gross Acres</td>
+            <td align="center">Percent of Target</td>
+            <td align="center">Female Population</td>
+            <td align="center">Hybrid Code</td>
+            <td align="center">Material Group</td>
+        </tr>
+        </th>
+    {% for data in dataPlan%}
+    <tr>      
+    <td align="center">{{ data.field_id }}</td>
+    <td align="center">{{ data.hybrid }}</td> 
+    <td align="center">{{ data.grower }}</td>
+    <td align="center">{{ data.field_name }}</td>
+    <td align="center">{{ data.certified }}</td>
+    <td align="center">{{ data.field_number }}</td>
+    <td align="center">{{ data.area }}</td>
+    <td align="center">{{ data.cont_gross_acres }}</td>
+    <td align="center">{{ data.percent_target }}</td>
+    <td align="center">{{ data.female_plant_population }}</td>
+    <td align="center">{{ data.hybrid_code }}</td>
+    <td align="center">{{ data.material_group }}</td>
 
-        <h2>Current Data in Database</h2>
-
-          <table>
-         <tbody>
-         {% for data in dataPlan%}
-         
-             <tr><td>{{ data.field_id }} {{ data.grower }} {{ data.field_name }}</td></tr>
-         {% endfor %}
-         </tbody>
-     </table>
-          
-
-       
-
-
-
-
-
-</center>
+    {% endfor %}
+    </tr>
+    </table>
+    </center>
 
 
 <script>
