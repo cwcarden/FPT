@@ -101,6 +101,16 @@
 
       <input type='submit' onclick="alertSaved()" value='Next Hybrid' />
 </div></center>
+<h1></h1>
+<h1></h1>
+
+<center>
+    {% for data in dataPlan %}
+    <ol> {{ data.id }}. {{ data.hybrid }}---{{ data.grower }}---{{ data.field_name }}---{{ data.certified }}---{{ data.field_number }}---{{ data.area }}---{{ data.cont_gross_acres }}---{{ data.percent_target }}---{{ data.female_plant_population }}---{{ data.hybrid_code }}---{{ data.material_group }}</ol>
+   {% endfor %} 
+
+</center>
+
 
 <script>
 function alertSaved() {

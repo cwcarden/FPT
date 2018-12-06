@@ -8,11 +8,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhos
 db = SQLAlchemy(app)
 
 class Fields(db.Model):
+    id = db.Column(db.Integer, primary_key=True, default=lambda: uuid.uuid4().hex)
     hybrid = db.Column(db.String(80), primary_key=True)
     grower = db.Column(db.String(80), primary_key=True)
     field_name = db.Column(db.String(80), unique=True)
     certified = db.Column(db.String(80), primary_key=True)
-    field_number = db.Column(db.Integer, primary_key=True)
+    field_number = db.Column(db.Integer, primary_key=True, unique=True)
     area = db.Column(db.Integer, primary_key=True)
     cont_gross_acres = db.Column(db.Integer, primary_key=True)
     percent_target = db.Column(db.Integer, primary_key=True)
@@ -34,7 +35,7 @@ class Fields(db.Model):
         self.material_group = material_group
     
     def __repr__(self):
-        return '<Fields %r>' % self.field_name
+        return '<Hybrid %r>' % self.hybrid
 
 @app.route('/')
 @app.route('/index')
@@ -43,7 +44,8 @@ def home():
 
 @app.route('/field_plan')
 def field_plan():
-    return render_template('field_plan.html')
+    dataPlan = Fields.query.all()
+    return render_template('field_plan.html', dataPlan=dataPlan)
 
 @app.route('/post_data', methods=['POST'])
 def post_data():
