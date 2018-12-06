@@ -4,8 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title><h1>Field Areage Planning</h1></title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
-       
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         <style>
 .navbar {
     overflow: hidden;
@@ -67,7 +66,6 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
 </style>
     </head>
     <div class="navbar">
@@ -77,12 +75,36 @@
                 <i class="fa fa-caret-down"></i>
               </button>
               <div class="dropdown-content">
-                <a href="/planning">Field Plan</a>
-                <a href="#">Reports</a>
+                <a href="#">Production Reports</a>
               </div>
             </div> 
           </div>
-          <body><center><h2>Production Reports</h2></center>
-          </body>
+          
 
-          <html></html>
+<div class='container'>
+    <center><h2>Production Field Acreage Plan</h2></center>
+    <center><h4> Enter information for each hybrid then click next</h4></center>
+    <form id="planningForm" method="post" action="/post_data">
+    <center><div class='form'>
+
+      <input type="text" id="hybrid" name="hybrid" placeholder="Hybrid"/><br>
+      <input type="text" id="grower" name="grower" placeholder="Grower Name"/><br>
+      <input type="text" id="field_name" name="field_name" placeholder="Field Name"/><br>
+      <input type="text" id="certified" name="certified" placeholder="Certification (Y or N)"/><br>
+      <input type="text" id="field_number" name="field_number" placeholder="Field Number"/><br>
+      <input type="text" id="area" name="area" placeholder="Area"/><br>
+      <input type="text" id="cont_gross_acres" name="cont_gross_acres" placeholder="Cont Gross Acres"/><br>
+      <input type="text" id="percent_target" name="percent_target" placeholder="Percent of Target"/><br>
+      <input type="text" id="female_plant_population" name="female_plant_population" placeholder="Female Population" /><br>
+      <input type="text" id="hybrid_code" name="hybrid_code" placeholder="Hybrid Code"/><br>  
+      <input type="text" id="material_group" name="material_group" placeholder="Material Group"/><br>  
+
+      <input type='submit' onclick="alertSaved()" value='Next Hybrid' />
+</div></center>
+
+<script>
+function alertSaved() {
+    alert("Data has been saved");
+}
+</script>
+</html>

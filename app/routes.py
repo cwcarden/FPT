@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)   
@@ -27,7 +27,7 @@ class Fields(db.Model):
         self.certified = certified 
         self.field_number = field_number
         self.area = area
-        self.cont_gross_acres 
+        self.cont_gross_acres = cont_gross_acres
         self.percent_target = percent_target
         self.female_plant_population = female_plant_population
         self.hybrid_code = hybrid_code
@@ -36,20 +36,21 @@ class Fields(db.Model):
     def __repr__(self):
         return '<Fields %r>' % self.field_name
 
-
 @app.route('/')
 @app.route('/index')
 def home():
     return render_template('index.html')
 
-@app.route('/planning', methods=['GET', 'POST'])
-def planning():
-    if request.method == 'POST':
-        result = request.form
-        print(result)  
-        return render_template('planning.html')
-    elif request.method == 'GET':
-        return render_template('planning.html')
+@app.route('/field_plan')
+def field_plan():
+    return render_template('field_plan.html')
+
+@app.route('/post_data', methods=['POST'])
+def post_data():
+    fields = Fields(request.form['hybrid'], request.form['grower'], request.form['field_name'], request.form['certified'],request.form['field_number'], request.form['area'],request.form['cont_gross_acres'], request.form['percent_target'], request.form['female_plant_population'], request.form['hybrid_code'], request.form['material_group']) 
+    db.session.add(fields)
+    db.session.commit()
+    return redirect(url_for('field_plan'))
 
 @app.route('/prod_budget', methods=['GET', 'POST'])
 def prod_budget():
@@ -60,9 +61,6 @@ def prod_budget():
     elif request.method == 'GET':
         return render_template('prod_budget.html')
 
-@app.route('/prod_reports')
-def prod_report():
-    return render_template('prod_reports.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
