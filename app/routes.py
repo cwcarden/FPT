@@ -4,11 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)   
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/prodplan'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///prodplan.db'
 db = SQLAlchemy(app)
 
 class Fields(db.Model):
-    field_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     hybrid = db.Column(db.String(80), primary_key=True)
     grower = db.Column(db.String(80), primary_key=True)
     field_name = db.Column(db.String(80), unique=True)
@@ -65,4 +65,4 @@ def prod_budget():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=4430, debug=True)
