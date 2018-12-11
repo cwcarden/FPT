@@ -1,0 +1,18 @@
+datatable {
+    border-collapse: collapse;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+datatable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+datatable th {
+    padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+
+}

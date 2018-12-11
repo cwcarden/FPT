@@ -1,5 +1,36 @@
 {% extends "layout.html" %}
 {% block content %}
+{% block head %}
+<style type="text/css">
+
+div dataDiv {
+    padding: 70px;
+    border: 1px solid #1b3a09;
+}
+#datatable {
+    border-collapse: collapse;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+#datatable td, #datatable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#datatable tr:nth-child(even){background-color: #f2f2f2;}
+
+#datatable tr:hover {background-color: #ddd;}
+
+#datable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+
+}
+</style>
+{% endblock %}
 <h1></h1>
 <p>'</p>
 <center>
@@ -54,10 +85,10 @@
 
 <h1></h1>
 <p></p>
-
+<div id="dataDiv" name="datadiv" title="datatable">
 <center>
-    <h2>Current Data in Database</h2>
-    <table style="margin-left: 12px;">
+    <h2>Current Plan in Database</h2>
+    <table id="datatable">
         <th>
             <tr style="color: #1b3a09; ">
             <td align="center">ID</td>
@@ -93,6 +124,6 @@
     </tr>
     </table>
     </center>
-
+</div>
 
 {% endblock content %}
