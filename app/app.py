@@ -47,7 +47,7 @@ def field_plan():
     dataPlan = Fields.query.all()
     return render_template('field_plan.html', dataPlan=dataPlan, title="Field Planning")
 
-@app.route('/post_data', methods=['POST'])
+@app.route('/post_data', methods=['GET','POST'])
 def post_data():
     fields = Fields(request.form['hybrid'], request.form['grower'], request.form['field_name'], request.form['certified'], request.form['field_number'], request.form['area'], request.form['cont_gross_acres'], request.form['percent_target'], request.form['female_plant_population'], request.form['hybrid_code'], request.form['material_group']) 
     db.session.add(fields)

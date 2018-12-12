@@ -2,8 +2,127 @@
 {% block content %}
 {% block head %}
 <style type="text/css">
+body {font-family: Arial, Helvetica, sans-serif;}
 
-div dataDiv {
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+#div bar {
     padding: 70px;
     border: 1px solid #1b3a09;
 }
@@ -33,58 +152,60 @@ div dataDiv {
 {% endblock %}
 <h1></h1>
 <p>'</p>
-<center>
-<h1>Production Field Acreage Planning</h1>
-<h4> Enter information for each hybrid then click next</h4></center>
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Enter Field</button>
 
-<div class="form-group">
-<form id="planningForm" method="post" action="/post_data">
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="/post_data">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
 
-      <label for="hybrid">Hybrid</label>
-      <input type="text" class="form-control" id="hybrid" name="hybrid" placeholder="Hybrid"/>
+    <div class="container">
+      <label for="hybrid"><b>Hybrid</b></label>
+      <input type="text" placeholder="Enter Hybrid" name="hybrid" required>
 
-      <label for="grower">Grower Name</label>
-      <input type="text" class="form-control" id="grower" name="grower" placeholder="Ex. 'Frische Farms', 'Lone Star Family Farms'">
+      <label for="grower"><b>Grower</b></label>
+      <input type="text" placeholder="Enter Grower Name" name="grower" required>
+      
+      <label for="field_name"><b>Field Name</b></label>
+      <input type="text" placeholder="Enter Field Name" name="field_name" required>
 
-      <label for="field_form">Field Name</label>
-      <input type="text" class="form-control" id="field_name" name="field_name"  placeholder="Ex. 'Mammas'">
+      <label for="certification"><b>Certified</b></label>
+      <input type="text" placeholder="Certification? 'Y', 'N'" name="certified" required>
+      
+      <label for="field_number"><b>Field Number</b></label>
+      <input type="text" placeholder="Enter Field Number" name="field_number" required>
 
-      <label for="field_form">Certification</label>
-      <input type="text" class="form-control" id="certified" name="certified" placeholder="Y or N">
+      <label for="area"><b>Growing Area</b></label>
+      <input type="text" placeholder="Enter Growing Area" name="area" required>
+      
+      <label for="cont_gross_acres"><b>Cont Gross Acres</b></label>
+      <input type="text" placeholder="Enter Gross Acres" name="cont_gross_acres" required>
 
-      <label for="field_form">Field Number</label>
-      <input type="text" class="form-control" id="field_number" name="field_number" placeholder="Ex '501'">
+      <label for="percent_target"><b>Percent of Target</b></label>
+      <input type="text" placeholder="Percent of Target" name="percent_target" required>
 
-      <label for="field_form">Growing Area</label>
-      <input type="text" class="form-control" id="area" name="area" placeholder="Ex. '4, 5, 7, 8'">
+      <label for="female_plant_population"><b>Female Plant Population</b></label>
+      <input type="text" placeholder="Enter Female Population" name="female_plant_population" required>
+      
+      <label for="hybrid_code"><b>Hybrid Code</b></label>
+      <input type="text" placeholder="Enter Hybrid Code" name="hybrid_code" required>
 
-      <label for="field_form">Cont Gross Acres</label>
-      <input type="text" class="form-control" id="cont_gross_acres" name="cont_gross_acres" placeholder="Have no clue what this is">
+      <label for="material_group"><b>Material Group</b></label>
+      <input type="text" placeholder="Enter Material Group" name="material_group" required>
 
-      <label for="field_form">Percent of Target</label>
-      <input type="text" class="form-control" id="percent_target" name="percent_target" placeholder="Most likely 100%">
+      <button type="submit">Submit</button>
+      
+    </div>
 
-      <label for="field_form">Female Population</label>
-      <input type="text" class="form-control" id="female_plant_population" name="female_plant_population" placeholder="Probably 80000">
-
-      <label for="field_form">Hybrid Code</label>
-      <input type="text" class="form-control" id="hybrid_code" name="hybrid_code" placeholder="Fantasy code">
-
-      <label for="field_form">Material Group</label>
-      <input type="text" class="form-control" id="material_group" name="material_group" placeholder="Ex. '020'">
-
-      <input type='submit' onclick="alertSaved()" value='SAVE. Enter Hybrid' />
-      </form>
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </form>
 </div>
 
-<script>
-    function alertSaved() {
-        alert("Data has been saved");
-    }
-    </script>
-
-<h1></h1>
-<p></p>
 <div id="dataDiv" name="datadiv" title="datatable">
 <center>
     <h2>Current Plan in Database</h2>
@@ -125,5 +246,17 @@ div dataDiv {
     </table>
     </center>
 </div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 
 {% endblock content %}
