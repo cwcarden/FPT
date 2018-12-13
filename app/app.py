@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)   
@@ -62,7 +62,6 @@ def delete_data():
     print(row_id)
     Seedfield.query.filter(Seedfield.id == row_id).delete()
     db.session.commit()
-    flash('Field Deleted Successfully')
     return redirect(url_for('field_plan'))
 ####################################################################################
 @app.route('/update', methods=['POST'])
