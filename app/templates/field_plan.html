@@ -152,14 +152,16 @@ span.psw {
 {% endblock %}
 <h1></h1>
 <p>'</p>
+<h1>'</h1>
+<center>
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Enter Field</button>
-
+</center>
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="/post_data">
+  <form class="modal-content animate" method="post" action="/post_data">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      <img src="/static/images/sorghum.png" height="50" width="100" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
