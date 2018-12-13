@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///prodplan.db'
 db = SQLAlchemy(app)
 
-class Fields(db.Model):
+class SeedField(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     hybrid = db.Column(db.String(80), nullable=False)
     grower = db.Column(db.String(80), nullable=False)
@@ -44,23 +44,22 @@ def home():
 
 @app.route('/field_plan')
 def field_plan():
-    dataPlan = Fields.query.all()
+    dataPlan = SeedField.query.all()
     return render_template('field_plan.html', dataPlan=dataPlan, title="Field Planning")
 
 @app.route('/post_data', methods=['POST'])
 def post_data():
-    fields = Fields(request.form['hybrid'], request.form['grower'], request.form['field_name'], request.form['certified'], request.form['field_number'], request.form['area'], request.form['cont_gross_acres'], request.form['percent_target'], request.form['female_plant_population'], request.form['hybrid_code'], request.form['material_group']) 
+    fields = SeedField(request.form['hybrid'], request.form['grower'], request.form['field_name'], request.form['certified'], request.form['field_number'], request.form['area'], request.form['cont_gross_acres'], request.form['percent_target'], request.form['female_plant_population'], request.form['hybrid_code'], request.form['material_group']) 
     db.session.add(fields)
     db.session.commit()
     return redirect(url_for('field_plan'))
 
 @app.route('/delete', methods=['POST'])
 def delete_data():
-    fields = Fields(request.form['hybrid'], request.form['grower'], request.form['field_name'], request.form['certified'], request.form['field_number'], request.form['area'], request.form['cont_gross_acres'], request.form['percent_target'], request.form['female_plant_population'], request.form['hybrid_code'], request.form['material_group']) 
-    db.session.delete(fields)
+    stuff = request.form['id']
+    db.session.delete(stuff)
     db.session.commit()
     return redirect(url_for('field_plan'))
-
 
 @app.route('/prod_budget', methods=['GET', 'POST'])
 def prod_budget():
