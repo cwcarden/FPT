@@ -54,6 +54,14 @@ def post_data():
     db.session.commit()
     return redirect(url_for('field_plan'))
 
+@app.route('/delete', methods=['POST'])
+def delete_data():
+    fields = Fields(request.form['hybrid'], request.form['grower'], request.form['field_name'], request.form['certified'], request.form['field_number'], request.form['area'], request.form['cont_gross_acres'], request.form['percent_target'], request.form['female_plant_population'], request.form['hybrid_code'], request.form['material_group']) 
+    db.session.delete(fields)
+    db.session.commit()
+    return redirect(url_for('field_plan'))
+
+
 @app.route('/prod_budget', methods=['GET', 'POST'])
 def prod_budget():
     return render_template('prod_budget.html', title='Budget Acres')

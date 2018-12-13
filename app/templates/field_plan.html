@@ -242,8 +242,13 @@ span.psw {
     <td align="center">{{ data.female_plant_population }}</td>
     <td align="center">{{ data.hybrid_code }}</td>
     <td align="center">{{ data.material_group }}</td>
+    <td>
+      <form action="/delete" method="post">
+        <input type="hidden" name="method" value="DELETE">
+        <input type="submit" value="Delete" class="btn btn-danger">
+      </form>
 
-    {% endfor %}
+     {% endfor %}
     </tr>
     </table>
     </center>
