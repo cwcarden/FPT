@@ -1,13 +1,15 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)   
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///prodplan.db'
+SECRET_KEY = '3562f179b152abb7ec44dc4362a87d53bfb62da503675c9b'
 db = SQLAlchemy(app)
 
-class SeedField(db.Model):
+class Seedfield(db.Model):
+    __tablename__ = 'seedfield'
     id = db.Column(db.Integer, primary_key=True)
     hybrid = db.Column(db.String(80), nullable=False)
     grower = db.Column(db.String(80), nullable=False)
@@ -44,20 +46,27 @@ def home():
 
 @app.route('/field_plan')
 def field_plan():
-    dataPlan = SeedField.query.all()
+    dataPlan = Seedfield.query.all()
     return render_template('field_plan.html', dataPlan=dataPlan, title="Field Planning")
 
 @app.route('/post_data', methods=['POST'])
 def post_data():
-    fields = SeedField(request.form['hybrid'], request.form['grower'], request.form['field_name'], request.form['certified'], request.form['field_number'], request.form['area'], request.form['cont_gross_acres'], request.form['percent_target'], request.form['female_plant_population'], request.form['hybrid_code'], request.form['material_group']) 
+    fields = Seedfield(request.form['hybrid'], request.form['grower'], request.form['field_name'], request.form['certified'], request.form['field_number'], request.form['area'], request.form['cont_gross_acres'], request.form['percent_target'], request.form['female_plant_population'], request.form['hybrid_code'], request.form['material_group']) 
     db.session.add(fields)
     db.session.commit()
     return redirect(url_for('field_plan'))
-
+####################################################################################
 @app.route('/delete', methods=['POST'])
 def delete_data():
-    stuff = request.form['id']
-    db.session.delete(stuff)
+    row_id = request.form['row_id']
+    print(row_id)
+    Seedfield.query.filter(Seedfield.id == row_id).delete()
+    db.session.commit()
+    flash('Field Deleted Successfully')
+    return redirect(url_for('field_plan'))
+####################################################################################
+@app.route('/update', methods=['POST'])
+def update_data():
     db.session.commit()
     return redirect(url_for('field_plan'))
 
