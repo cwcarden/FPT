@@ -9,6 +9,7 @@ flask = "*"
 request = "*"
 flask-sqlalchemy = "*"
 "psycopg2" = "*"
+fpdf = "*"
 
 [dev-packages]
 pylint = "*"
