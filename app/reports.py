@@ -52,7 +52,11 @@ def fp_grower_data():
     c.execute('SELECT id, grower, hybrid, field_name, certified, field_number, area, cont_gross_acres, percent_target, female_plant_population, hybrid_code, material_group FROM Seedfield')
     data = c.fetchall()
     conn.close()
-    for field in data:
-        field_list = []
-        field_list.append(field)
-        print(field_list)
+    for fields in data:
+        lfields = list(fields)
+        print(lfields)
+        for index in lfields:
+            print(lfields[1])
+   
+    
+
