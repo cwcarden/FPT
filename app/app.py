@@ -77,6 +77,11 @@ class Seedfield(db.Model):
 def home():
     return render_template('home.html', title='Home')
 
+@app.route('/reports')
+def reports():
+    return render_template('reports.html', title='Reports')
+
+
 ###############################################################################
 @app.route('/field_plan')
 def field_plan():
@@ -114,7 +119,7 @@ def post_budget_data():
     db.session.commit()
     return redirect(url_for('prod_budget'))
 
-@app.route('/delete', methods=['POST'])
+@app.route('/delete_budget_data', methods=['POST'])
 def delete_budget_data():
     row_id = request.form['row_id']
     print(row_id)
