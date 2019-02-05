@@ -22,7 +22,7 @@ class Budget(db.Model):
     female_seed_kg = db.Column(db.Integer, nullable= False)
     male_seed_kg = db.Column(db.Integer, nullable= False)
     female_unit_50lb = db.Column(db.Integer, nullable= False)
-    certified = db.Column(db.String(5), nullable=False)
+    certified = db.Column(db.String(10), nullable=False)
     percent_female = db.Column(db.Integer, nullable=False)
 
     def __init__(self, hybrid, area, units_ga, female_acres, fifty_lb_units, female_parent, male_parent, gross_acres, female_seed_kg, male_seed_kg, female_unit_50lb, certified, percent_female):
@@ -77,6 +77,7 @@ class Seedfield(db.Model):
 def home():
     return render_template('home.html', title='Home')
 
+###############################################################################
 @app.route('/field_plan')
 def field_plan():
     dataPlan = Seedfield.query.all()
@@ -88,7 +89,7 @@ def post_data():
     db.session.add(fields)
     db.session.commit()
     return redirect(url_for('field_plan'))
-####################################################################################
+
 @app.route('/delete', methods=['POST'])
 def delete_data():
     row_id = request.form['row_id']
@@ -96,11 +97,9 @@ def delete_data():
     Seedfield.query.filter(Seedfield.id == row_id).delete()
     db.session.commit()
     return redirect(url_for('field_plan'))
-####################################################################################
-@app.route('/update', methods=['POST'])
-def update_data():
-    db.session.commit()
-    return redirect(url_for('field_plan'))
+
+###############################################################################
+###############################################################################
 
 #Start Sorghum Acreage Plan
 @app.route('/prod_budget', methods=['GET', 'POST'])
@@ -122,7 +121,7 @@ def delete_budget_data():
     Budget.query.filter(Budget.id == row_id).delete()
     db.session.commit()
     return redirect(url_for('prod_budget'))
-
+###############################################################################
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
