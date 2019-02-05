@@ -1,4 +1,284 @@
 {% extends "layout.html" %}
 {% block content %}
+{% block head %}
+<style type="text/css">
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+#div bar {
+    padding: 70px;
+    border: 1px solid #1b3a09;
+}
+#datatable {
+    border-collapse: collapse;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+#datatable td, #datatable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#datatable tr:nth-child(even){background-color: #f2f2f2;}
+
+#datatable tr:hover {background-color: #ddd;}
+
+#datable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+
+}
+</style>
+{% endblock %}
+<h1></h1>
+<p>'</p>
+<h1>'</h1>
+<center>
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Enter Field</button>
+</center>
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" method="post" action="/post_budget_data">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="/static/images/sorghum.png" height="50" width="100" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label for="hybrid"><b>Hybrid</b></label>
+      <input type="text" placeholder="Enter Hybrid" name="hybrid" required>
+
+      <label for="area"><b>Area</b></label>
+      <input type="text" placeholder="Enter Pla1 or Pla2?" name="area" required>
+      
+      <label for="units_ga"><b>Units/Ga</b></label>
+      <input type="text" placeholder="Enter Units per Ga" name="units_ga" required>
+
+      <label for="female_acres"><b>Female Acres</b></label>
+      <input type="text" placeholder="Total Female Acres" name="female_acres" required>
+      
+      <label for="fifty_lb_units"><b>Fifty lb Units</b></label>
+      <input type="text" placeholder="Enter total 50 lb units" name="fifty_lb_units" required>
+
+      <label for="female_parent"><b>Female Parent</b></label>
+      <input type="text" placeholder="Enter the Female Parent" name="female_parent" required>
+      
+      <label for="male_parent"><b>Male Parent</b></label>
+      <input type="text" placeholder="Enter the Male Parent" name="male_parent" required>
+
+      <label for="gross_acres"><b>Gross Acres</b></label>
+      <input type="text" placeholder="Enter total Gross Acres" name="gross_acres" required>
+
+      <label for="female_seed_kg"><b>Female Parent Seed/kg</b></label>
+      <input type="text" placeholder="Enter Female Parent Seeds per kg" name="female_seed_kg" required>
+      
+      <label for="male_seed_kg"><b>Male Parent Seeds/kg</b></label>
+      <input type="text" placeholder="Enter Male Parent Seeds per kg" name="male_seed_kg" required>
+
+      <label for="female_unit_50lb"><b>Female 50 lb units</b></label>
+      <input type="text" placeholder="Enter total Female 50 lb units" name="female_unit_50lb" required>
+
+      <label for="certified"><b>Certification</b></label>
+      <input type="text" placeholder="Material is certified? Y or N name="certified" required>
+
+      <label for="percent_female"><b>Percent Female</b></label>
+      <input type="text" placeholder="Enter percent female in whole integer format 'Example: 72 = 72%'" name="percent_female" required>
+
+      <button type="submit">Submit</button>
+      
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<div id="dataDiv" name="datadiv" title="datatable">
+<center>
+    <h2>2019 Sorghum Acreage Plan </h2>
+    <table id="datatable">
+        <th>
+            <tr style="color: #1b3a09; ">
+            <td align="center">ID</td>
+            <td align="center">Hybrid</td>
+            <td align="center">Growing Area</td>
+            <td align="center">Units/GA</td>
+            <td align="center">Female Acres</td>
+            <td align="center">Fifty lb Units</td>
+            <td align="center">Female Parent</td>
+            <td align="center">Male Parent</td>
+            <td align="center">Gross Acres</td>
+            <td align="center">Female Parent Seeds/kg</td>
+            <td align="center">Male Parent Seeds/kg</td>
+            <td align="center">Female 50lb Units</td>
+            <td align="center">Certified</td>
+            <td align="center">%Female</td>
+        </tr>
+        </th>
+    {% for data in acrePlan%}
+    <tr>      
+    <td align="center">{{ data.id }}</td>
+    <td align="center">{{ data.hybrid }}</td> 
+    <td align="center">{{ data.area }}</td>
+    <td align="center">{{ data.units_ga }}</td>
+    <td align="center">{{ data.female_acres }}</td>
+    <td align="center">{{ data.fifty_lb_units }}</td>
+    <td align="center">{{ data.female_parent }}</td>
+    <td align="center">{{ data.male_parent }}</td>
+    <td align="center">{{ data.gross_acres }}</td>
+    <td align="center">{{ data.female_seed_kg }}</td>
+    <td align="center">{{ data.male_seed_kg }}</td>
+    <td align="center">{{ data.female_unit_50lb }}</td>
+    <td align="center">{{ data.certified }}</td>
+    <td align="center">{{ data.percent_female }}</td>
+    <td>
+      <form action="/update" method="post">
+        <input type="hidden" value="{{ data.id }}">
+        <input type="submit" value="Edit" class="btn btn-primary">
+      </form>
+    <td>
+      <form action="{{ url_for('delete_budget_data') }}" method="post" class="delete-entry">
+        <input type="hidden" name="row_id" value="{{ data.id }}">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+      </form>
+
+     {% endfor %}
+    </tr>
+    </table>
+    </center>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 
 {% endblock content %}

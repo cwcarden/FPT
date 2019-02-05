@@ -8,6 +8,39 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///prodplan.db'
 SECRET_KEY = '3562f179b152abb7ec44dc4362a87d53bfb62da503675c9b'
 db = SQLAlchemy(app)
 
+class Budget(db.Model):
+    __tablename__ = 'budget'
+    id = db.Column(db.Integer, primary_key=True)
+    hybrid = db.Column(db.String(10), nullable=False)
+    area = db.Column(db.Integer, nullable=False)
+    units_ga = db.Column(db.Integer, nullable=False)
+    female_acres = db.Column(db.Integer, nullable=False)
+    fifty_lb_units = db.Column(db.Integer, nullable=False)
+    female_parent = db.Column(db.String(10), nullable=False)
+    male_parent = db.Column(db.String(10), nullable=False)
+    gross_acres = db.Column(db.Integer, nullable=False)
+    female_seed_kg = db.Column(db.Integer, nullable= False)
+    male_seed_kg = db.Column(db.Integer, nullable= False)
+    female_unit_50lb = db.Column(db.Integer, nullable= False)
+    certified = db.Column(db.String(5), nullable=False)
+    percent_female = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, hybrid, area, units_ga, female_acres, fifty_lb_units, female_parent, male_parent, gross_acres, female_seed_kg, male_seed_kg, female_unit_50lb, certified, percent_female):
+        self.hybrid = hybrid
+        self.area = area
+        self.units_ga = units_ga
+        self.female_acres = female_acres
+        self.fifty_lb_units = fifty_lb_units
+        self.female_parent = female_parent
+        self.male_parent = male_parent
+        self.gross_acres = gross_acres
+        self.female_seed_kg = female_seed_kg
+        self.male_seed_kg = male_seed_kg
+        self.female_unit_50lb = female_unit_50lb
+        self.certified = certified
+        self.percent_female = percent_female
+
+
 class Seedfield(db.Model):
     __tablename__ = 'seedfield'
     id = db.Column(db.Integer, primary_key=True)
@@ -69,9 +102,26 @@ def update_data():
     db.session.commit()
     return redirect(url_for('field_plan'))
 
+#Start Sorghum Acreage Plan
 @app.route('/prod_budget', methods=['GET', 'POST'])
 def prod_budget():
-    return render_template('prod_budget.html', title='Budget Acres')
+    acrePlan = Budget.query.all()
+    return render_template('prod_budget.html', acrePlan=acrePlan, title='Budget Plan')
+
+@app.route('/post_budget_data', methods=['POST'])
+def post_budget_data():
+    plan = Budget(request.form['hybrid'], request.form['area'], request.form['units_ga'], request.form['female_acres'],request.form['fifty_lb_units'], request.form['female_parent'], request.form['male_parent'], request.form['gross_acres'], request.form['female_seed_kg'], request.form['male_seed_kg'], request.form['female_unit_50lb'], request.form['certified'], request.form['percent_female']) 
+    db.session.add(plan)
+    db.session.commit()
+    return redirect(url_for('prod_budget'))
+
+@app.route('/delete', methods=['POST'])
+def delete_budget_data():
+    row_id = request.form['row_id']
+    print(row_id)
+    Budget.query.filter(Budget.id == row_id).delete()
+    db.session.commit()
+    return redirect(url_for('prod_budget'))
 
 
 if __name__ == '__main__':
