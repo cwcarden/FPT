@@ -12,6 +12,7 @@ class Budget(db.Model):
     __tablename__ = 'budget'
     id = db.Column(db.Integer, primary_key=True)
     hybrid = db.Column(db.String(10), nullable=False)
+    hybrid_code = db.Column(db.String(5), nullable=False)
     area = db.Column(db.Integer, nullable=False)
     units_ga = db.Column(db.Integer, nullable=False)
     female_acres = db.Column(db.Integer, nullable=False)
@@ -25,8 +26,9 @@ class Budget(db.Model):
     certified = db.Column(db.String(10), nullable=False)
     percent_female = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, hybrid, area, units_ga, female_acres, fifty_lb_units, female_parent, male_parent, gross_acres, female_seed_kg, male_seed_kg, female_unit_50lb, certified, percent_female):
+    def __init__(self, hybrid, hybrid_code, area, units_ga, female_acres, fifty_lb_units, female_parent, male_parent, gross_acres, female_seed_kg, male_seed_kg, female_unit_50lb, certified, percent_female):
         self.hybrid = hybrid
+        self.hybrid_code = hybrid_code
         self.area = area
         self.units_ga = units_ga
         self.female_acres = female_acres
@@ -114,7 +116,7 @@ def prod_budget():
 
 @app.route('/post_budget_data', methods=['POST'])
 def post_budget_data():
-    plan = Budget(request.form['hybrid'], request.form['area'], request.form['units_ga'], request.form['female_acres'],request.form['fifty_lb_units'], request.form['female_parent'], request.form['male_parent'], request.form['gross_acres'], request.form['female_seed_kg'], request.form['male_seed_kg'], request.form['female_unit_50lb'], request.form['certified'], request.form['percent_female']) 
+    plan = Budget(request.form['hybrid'], request.form['hybrid_code'], request.form['area'], request.form['units_ga'], request.form['female_acres'],request.form['fifty_lb_units'], request.form['female_parent'], request.form['male_parent'], request.form['gross_acres'], request.form['female_seed_kg'], request.form['male_seed_kg'], request.form['female_unit_50lb'], request.form['certified'], request.form['percent_female']) 
     db.session.add(plan)
     db.session.commit()
     return redirect(url_for('prod_budget'))

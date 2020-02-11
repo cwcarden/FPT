@@ -168,6 +168,9 @@ span.psw {
       <label for="hybrid"><b>Hybrid</b></label>
       <input type="text" placeholder="Enter Hybrid" name="hybrid" required>
 
+      <label for="hybrid_code"><b>Hybrid Code</b></label>
+      <input type="text" placeholder="Enter Hybrid Code" name="hybrid_code" required>
+
       <label for="area"><b>Area</b></label>
       <input type="text" placeholder="Enter Pla1 or Pla2?" name="area" required>
       
@@ -216,12 +219,13 @@ span.psw {
 
 <div id="dataDiv" name="datadiv" title="datatable">
 <center>
-    <h2>2019 Sorghum Acreage Plan </h2>
+    <h2>Budget Acreage Plan </h2>
     <table id="datatable">
         <th>
             <tr style="color: #1b3a09; ">
             <td align="center">ID</td>
             <td align="center">Hybrid</td>
+            <TD align="center">Hybrid Code</td>
             <td align="center">Growing Area</td>
             <td align="center">Units/GA</td>
             <td align="center">Female Acres</td>
@@ -240,6 +244,7 @@ span.psw {
     <tr>      
     <td align="center">{{ data.id }}</td>
     <td align="center">{{ data.hybrid }}</td> 
+    <td align="center">{{ data.hybrid_code }}</td>
     <td align="center">{{ data.area }}</td>
     <td align="center">{{ data.units_ga }}</td>
     <td align="center">{{ data.female_acres }}</td>

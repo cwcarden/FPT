@@ -4,5 +4,25 @@
 <h1></h1>
 <h1> /</h1>
 <center><h2>Acreage to Field Plan Overview</h2></center>
+{% for data in acrePlan%}
+    <tr>      
+    <td align="center">{{ data.id }}</td>
+    <td align="center">{{ data.hybrid }}</td> 
+    <td align="center>"{{ data.grower}}
+    <td align="center">{{ data.area }}</td>
+    <td align="center">{{ data.female_acres }}</td>
+    <td align="center">{{ data.fifty_lb_units }}</td>
+    <td align="center">{{ data.female_parent }}</td>
+    <td align="center">{{ data.male_parent }}</td>
+    <td align="center">{{ data.gross_acres }}</td>
+    <td align="center">{{ data.female_seed_kg }}</td>
+    <td align="center">{{ data.male_seed_kg }}</td>
+    <td align="center">{{ data.female_unit_50lb }}</td>
+    <td align="center">{{ data.certified }}</td>
+    <td align="center">{{ data.percent_female }}</td>
+    <td>
+     
+
+     {% endfor %}
 
 {% endblock content %}
